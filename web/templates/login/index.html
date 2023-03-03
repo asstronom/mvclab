@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8">
+        <title>TODO</title>
+    </head>
+    <body>
+        {{if .WrongCredentials}}
+        <p>Wrong Credentials</p>
+        {{end}}
+        <form action="/login" method="POST">
+            <label for="inputUsername">Username</label><br>
+            <input type="username" name="username">
+            <br><br>
+            <label for="inputPassword">Password</label><br>
+            <input type="password" name="password">
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8">
+        <title>TODO</title>
+        <script>
+            function activateSave() {
+                document.getElementById("save").disabled = false;
+            }
+        </script>
+    </head>
+    <body>
+        <form action="/profile/{{ .ID }}" method="POST">
+            <p>User: {{ .Username }}</p>
+            <label for="firstName">First Name</label><br>
+            <input type="firstName" name="firstName" value="{{ .FirstName}}" onchange='activateSave();'>
+            <br><br>
+            <label for="lastName">LastName</label><br>
+                <input type="lastName" name="lastName" value="{{ .LastName}}" onchange='activateSave();' />
+            <br><br>
+            <label for="email">Email</label><br>
+            <input type="email" name="email" value="{{ .Email}}" onchange='activateSave();' /> 
+            <span id='message'></span>
+            <br><br>
+            <label for="status">Status</label><br>
+            <input type="status" name="status" value="{{ .Status}}" onchange='activateSave();' /> 
+            <span id='message'></span>
+            <br><br>
+            <label for="description">Description</label><br>
+            <input type="description" name="description" value="{{ .Description}}" onchange='activateSave();' /> 
+            <span id='message'></span>
+            <br><br>
+            <input type="submit" id="save" value="Save" disabled>
+        </form>
+    </body>
+</html>

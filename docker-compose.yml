@@ -1,0 +1,63 @@
+# Specify the version for docker-compose.yml
+version: "3.8"
+
+# add the serivces needed (postgres,go)
+services:
+  # app:
+  #   container_name: api-server
+  #   environment:
+  #     - DB_USER=${DB_USER}
+  #     - DB_PASSWORD=${DB_PASSWORD}
+  #     - DB_NAME=${DB_NAME}
+  #     - DB_HOST=${DB_HOST}
+  #     - DB_PORT=${DB_PORT}
+  #   build: .
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #   ports:
+  #     - '8000:8080'
+  #   networks:
+  #     - learning
+
+  postgres:
+    container_name: ${DB_HOST}
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes: 
+      - dbdata:/var/lib/postgresql/data
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ${DB_USER} -d ${DB_NAME}'"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+
+  # dbtest:
+  #   container_name: testdb
+  #   image: postgres:latest
+  #   environment:
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: mypassword
+  #     POSTGRES_DB: ${DB_NAME}
+  #   ports:
+  #     - "2345:5432"
+  #   volumes: 
+  #     - dbdata:/var/lib/postgresql/data
+  #   networks:
+  #     - learning
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local

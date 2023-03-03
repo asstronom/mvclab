@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8">
+        <title>TODO</title>
+        <script>
+            function checkPasswordConfirm() {
+                if (document.getElementById('password').value ==
+                document.getElementById('confirm_password').value) {
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').innerHTML = 'matching';
+                return true;
+                } else {
+      		        document.getElementById('message').style.color = 'red';
+                    document.getElementById('message').innerHTML = 'not matching';
+                   return false;
+                }
+            }
+
+            function checkEmpty() {
+                if (!document.getElementById('username').value 
+                    || !document.getElementById('password').value 
+                    || !document.getElementById('confirm_password').value) {
+                        return true;
+                } else {
+                    return false;
+                }
+            }
+
+            function check() {
+                var confirm = checkPasswordConfirm()
+                if (!checkEmpty()) {
+                    if (confirm) {
+                        document.getElementById('submit').disabled = false;
+                    } else {
+                        document.getElementById('submit').disabled = true;
+                    }
+                } else {
+                    document.getElementById('submit').disabled = true;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <p>{{ .ErrorMessage }}</p>
+        <form action="/signup" method="POST">
+            <label for="inputUsername">Username</label><br>
+            <input type="username" name="username" id="username" value="{{ .Username}}" onkeyup='check();'>
+            <br><br>
+            <label for="inputPassword">Password</label><br>
+                <input name="password" id="password" type="password" onkeyup='check();'/>
+            <br><br>
+            <label for="inputConfirmPassword">confirm password:</label><br>
+            <input type="password" name="confirm_password" id="confirm_password" onkeyup='check();'/> 
+            <span id='message'></span>
+            <br><br>
+            <input type="submit" id="submit" value="Submit" disabled>
+        </form>
+    </body>
+</html>
