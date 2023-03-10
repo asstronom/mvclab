@@ -9,7 +9,7 @@
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "cmd/web/main.go",
+            "program": "cmd/profile_app/main.go",
             "cwd": "${workspaceFolder}"
         }
     ]
