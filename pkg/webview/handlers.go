@@ -80,7 +80,6 @@ func (s *Server) editProfile(w http.ResponseWriter, r *http.Request) {
 	}
 
 	r.ParseForm()
-	r.PostFor
 	var user domain.User
 	user.ID = id
 	user.FirstName = r.PostFormValue("firstName")
