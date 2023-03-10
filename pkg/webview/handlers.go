@@ -24,6 +24,19 @@ func (s *Server) login(w http.ResponseWriter, r *http.Request) {
 	tmplLogin.Execute(w, nil)
 }
 
+// ShowProfile godoc
+//
+//	@Summary		Show an account
+//	@Description	get profile by id
+//	@Tags			accounts
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	path		int	true	"Account ID"
+//	@Success		200	{object}	domain.User
+//	@Failure		400	{object}	domain.User
+//	@Failure		404	{object}	domain.User
+//	@Failure		500	{object}	domain.User
+//	@Router			/profile/{id} [get]
 func (s *Server) profile(w http.ResponseWriter, r *http.Request) {
 	param := mux.Vars(r)["id"]
 	requestedId, err := strconv.ParseInt(param, 10, 32)
@@ -67,6 +80,7 @@ func (s *Server) editProfile(w http.ResponseWriter, r *http.Request) {
 	}
 
 	r.ParseForm()
+	r.PostFor
 	var user domain.User
 	user.ID = id
 	user.FirstName = r.PostFormValue("firstName")
