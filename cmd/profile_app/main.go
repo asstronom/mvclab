@@ -48,7 +48,7 @@ func main() {
 	//applying migrations to db
 	migrateurl := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable",
 		dbconf.User, dbconf.Password, dbconf.Host, dbconf.Port, dbconf.Name)
-	pathToMigrations := "pkg/model/migrate/sql" //"../../pkg/db/migrations/sql"
+	pathToMigrations := "schema" //"../../pkg/db/migrations/sql"
 	err = migrations.MigrateUp(pathToMigrations, migrateurl)
 	if err != nil {
 		log.Fatalf("error migrating db: %s\n", err)
